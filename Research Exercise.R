@@ -29,13 +29,15 @@ data$pcontrol <- ifelse(data$pcontrol == "D", 1, 0)
 fit <- lm(n_landmark ~ dw_diff, data = data)
 summary(fit)
 
-# Scatterplot of aggregate DW-NOMINATE scores
+# Scatterplot of dw_diff and n_landmark
 plot(data$dw_diff, data$n_landmark,
      xlab = "Difference in average DW-NOMINATE score between Republicans and Democratics",
      ylab = "Number of landmark legislation passed",
      pch = 19,
      col = "blue")
+# Add linear model
 abline(fit, lwd = 3)
+# Add linear model equation
 text(1, 30, "y = 24.238 - 8.528x")
 
 # Run linear regression with controls
