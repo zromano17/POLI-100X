@@ -31,7 +31,7 @@ summary(fit)
 
 # Scatterplot of dw_diff and n_landmark
 plot(data$dw_diff, data$n_landmark,
-     xlab = "Difference in average DW-NOMINATE score between Republicans and Democratics",
+     xlab = "Difference in average DW-NOMINATE score between Republicans and Democrats",
      ylab = "Number of landmark legislation passed",
      pch = 19,
      col = "blue")
