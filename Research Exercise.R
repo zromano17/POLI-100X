@@ -38,11 +38,22 @@ plot(data$dw_diff, data$n_landmark,
 # Add linear model
 abline(fit, lwd = 3)
 # Add linear model equation
-text(1, 30, "y = 24.238 - 8.528x")
+text(.95, 30, "n_landmark = 24.238 - 8.528(dw_diff)")
 
 # Run linear regression with controls
 fit1 <- lm(n_landmark ~ dw_diff + scontrol + pcontrol + hcontrol, data = data)
 summary(fit1)
+
+# Scatterplot of dw_diff and n_landmark
+plot(data$dw_diff, data$n_landmark,
+     xlab = "Difference in average DW-NOMINATE score between Republicans and Democrats",
+     ylab = "Number of landmark legislation passed",
+     pch = 19,
+     col = "blue")
+# Add new linear model
+abline(fit1, lwd = 3)
+# Add new linear model equation
+text(.8, 30, "n_landmark = 16.2143 - 1.3987(dw_diff) - 4.1250(scontrol) - 0.1218(pcontrol) + 8.7294(hcontrol)", cex = .9)
 
 # Run linear regression with controls and Congress-level fixed effects
 fit2 <- felm(n_landmark ~ dw_diff + scontrol + pcontrol + hcontrol | factor(cong), data = data)
