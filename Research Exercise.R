@@ -56,5 +56,6 @@ abline(fit1, lwd = 3)
 text(.8, 30, "n_landmark = 16.2143 - 1.3987(dw_diff) - 4.1250(scontrol) - 0.1218(pcontrol) + 8.7294(hcontrol)", cex = .9)
 
 # Run linear regression with controls and Congress-level fixed effects
+# This code is not working right now... trying to find a fix or ask on Thursday
 fit2 <- felm(n_landmark ~ dw_diff + scontrol + pcontrol + hcontrol | factor(cong), data = data)
 summary(fit2)
