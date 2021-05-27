@@ -25,6 +25,9 @@ data$scontrol <- ifelse(data$scontrol == "D", 1, 0)
 data$hcontrol <- ifelse(data$hcontrol == "D", 1, 0)
 data$pcontrol <- ifelse(data$pcontrol == "D", 1, 0)
 
+# Create a variable for decade
+data$decade <- data$year - (data$year %% 10)
+
 # Run linear regression with no controls
 fit <- lm(n_landmark ~ dw_diff, data = data)
 summary(fit)
@@ -41,8 +44,8 @@ abline(fit, lwd = 3)
 text(.95, 30, "n_landmark = 24.238 - 8.528(dw_diff)")
 
 # Run linear regression with controls
-fit1 <- lm(n_landmark ~ dw_diff + scontrol + pcontrol + hcontrol, data = data)
-summary(fit1)
+fit.controls <- lm(n_landmark ~ dw_diff + scontrol + pcontrol + hcontrol, data = data)
+summary(fit.controls)
 
 # Scatterplot of dw_diff and n_landmark
 plot(data$dw_diff, data$n_landmark,
@@ -51,11 +54,10 @@ plot(data$dw_diff, data$n_landmark,
      pch = 19,
      col = "blue")
 # Add new linear model
-abline(fit1, lwd = 3)
+abline(fit.controls, lwd = 3)
 # Add new linear model equation
 text(.8, 30, "n_landmark = 16.2143 - 1.3987(dw_diff) - 4.1250(scontrol) - 0.1218(pcontrol) + 8.7294(hcontrol)", cex = .9)
 
 # Run linear regression with controls and Congress-level fixed effects
-# This code is not working right now... trying to find a fix or ask on Thursday
-fit2 <- felm(n_landmark ~ dw_diff + scontrol + pcontrol + hcontrol | factor(cong), data = data)
-summary(fit2)
+fit.fe <- felm(n_landmark ~ dw_diff + scontrol + pcontrol + hcontrol | factor(decade), data = data)
+summary(fit.fe)
