@@ -58,6 +58,6 @@ abline(fit.controls, lwd = 3)
 # Add new linear model equation
 text(.8, 30, "n_landmark = 16.2143 - 1.3987(dw_diff) - 4.1250(scontrol) - 0.1218(pcontrol) + 8.7294(hcontrol)", cex = .9)
 
-# Run linear regression with controls and Congress-level fixed effects
+# Run linear regression with controls and decade-level fixed effects
 fit.fe <- felm(n_landmark ~ dw_diff + scontrol + pcontrol + hcontrol | factor(decade), data = data)
 summary(fit.fe)
